@@ -9,6 +9,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.stereotype.Service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,8 +17,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+@Service
 public class PdfServiceImpl implements PdfService {
+
+
     private PdfPTable table;
+
     private static final Font DOCUMENT_TITLE_FONT = new Font(Font.FontFamily.TIMES_ROMAN, 20, Font.BOLD);
     private static final String[] HEADERS_NAMES = new String[]{"REPORT TITLE", "REPORT", "LABOR COST"};
     private static final int NUMS_COLUMNS = HEADERS_NAMES.length;
@@ -26,11 +31,11 @@ public class PdfServiceImpl implements PdfService {
     private static final Font COLS_FONT = new Font(Font.FontFamily.TIMES_ROMAN, 14);
 
     @Override
-    public void createPdf() throws ServiceException {
+    public void createPdf(String path) throws ServiceException {
 
         Document document = new Document();
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream( "reports.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path + "reports.pdf"));
             document.open();
             document.add(new Paragraph("Hi, we are Yellow command.\nThis are reports about our workday!\n\n", DOCUMENT_TITLE_FONT));
             document.add(createTable());
