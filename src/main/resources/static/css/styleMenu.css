@@ -50,11 +50,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Montserrat", sans-serif;
-    background: url('/static/images/web-background.jpg') 0 0 no-repeat;
+    background: url('../images/web-background.jpg') 0 0 no-repeat;
     background-size: 100% 100%;
 }
 
-li, a, button {
+li, a, button, input {
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -95,7 +95,7 @@ header {
     color: #0088a9;
 }
 
-button {
+button [name="other"] {
     padding: 9px 25px;
     background-color: rgba(0, 136, 169, 1);
     border: none;
@@ -104,7 +104,7 @@ button {
     transition: all 0.3s ease 0s;
 }
 
-button:hover {
+button:hover[name="other"] {
     background-color: rgba(0, 136, 169, 0.8);
 }
 

@@ -40,6 +40,7 @@ public class TelegramController {
     @RequestMapping("/index")
     public String index(Model model, HttpServletResponse response, HttpServletRequest request) {
         String basePath = request.getServletContext().getRealPath("/");
+
         System.out.println();
         return "Hello spring boot index";
     }
