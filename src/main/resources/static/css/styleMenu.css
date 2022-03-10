@@ -75,7 +75,7 @@ header {
 }
 
 .block {
-     background-image: url('images/web-background.jpg');
+     background-image: url('../images/web-background.jpg');
 }
 
 .nav_links {

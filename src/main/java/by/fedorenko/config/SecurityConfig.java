@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/registration").permitAll()
                 .antMatchers("/css/**", "/js/**","/images/**", "/webjars/**", "**/favicon.ico").permitAll()
                 .anyRequest()
                 .authenticated()
@@ -66,4 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
     }
+
+
+
+
+
 }

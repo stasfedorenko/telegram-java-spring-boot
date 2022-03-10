@@ -34,7 +34,7 @@ public class TelegramController {
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-        return "telegram-page";
+        return "redirect:/";
     }
 
     @RequestMapping("/index")

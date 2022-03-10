@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styleBox.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="css/styleMenu.css"/>-->
+</head>
+<body>
+<div th:if="${message}"></div>
+<div class="box">
+    <form th:action="@{/registration}" method="post">
+        <h1>Registration</h1>
+        <input placeholder="first_name" type="text" autocomplete="off" name="firstName"/>
+        <input placeholder="last_name" type="text" autocomplete="off" name="lastName"/>
+        <input placeholder="email" type="text" autocomplete="off" name="email"/>
+        <input placeholder="password" type="password" name="password"/>
+        <input type="submit" value="Registration"/>
+    </form>
+    <button name="cancel"><a href="/">Cancel</a></button>
+</div>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+</body>
+</html>

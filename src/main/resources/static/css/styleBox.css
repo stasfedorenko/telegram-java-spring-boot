@@ -61,13 +61,25 @@ body {
 
 .box h1 {
     color: white;
-    font-size: 20px;
+    font-size: 24px;
     text-transform: uppercase;
     background: #191919;
 
     font-weight: 400;
 }
 
+.box h1[name="error"]{
+    color: #e00808;
+}
+
+.box p[name="info"] {
+    color: white;
+    font-size: 18px;
+    text-transform: capitalize;
+    background: #191919;
+
+    font-weight: 400;
+}
 .box input[type="text"],.box input[type="password"]{
     border: 0;
     background: none;
