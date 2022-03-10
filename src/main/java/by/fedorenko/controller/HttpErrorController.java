@@ -62,8 +62,6 @@ public class HttpErrorController implements ErrorController {
             }
 
         }
-
-
         return "redirect:/error";
     }
 

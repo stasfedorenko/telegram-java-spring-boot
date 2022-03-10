@@ -1,11 +1,9 @@
 package by.fedorenko.controller;
 
-
 import by.fedorenko.entity.Role;
 import by.fedorenko.entity.Status;
 import by.fedorenko.entity.User;
 import by.fedorenko.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +15,11 @@ import java.util.*;
 public class RegistrationController {
 
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public RegistrationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/registration")
     public String index() {

@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-   		<meta charset="UTF-8">
-      	<title>Login</title>
-      	<meta name="description" content="">
-      	<meta name="viewport" content="width=device-width, initial-scale=1">
-      	<link rel="stylesheet"  type="text/css" href="css/styleBox.css" />
-   </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/styleBox.css"/>
+    <link rel="shortcut icon" href="images/icon.jpg" type="image/jpg">
 
-   <body>
-	<div class="box">
-		<form  th:action="@{/login}" method="post" >
-			<h1>Login</h1>
-			<input placeholder="user name" type="text" autocomplete="off" name="username" />
-			<input placeholder="password" type="password" name="password"  />
-			<input type="submit" value="Login" />
-		</form>
-		<button name="cancel"><a href="/">Cancel</a></button>
-	</div>
+</head>
+
+<body>
+<div class="box">
+    <form th:action="@{/login}" method="post">
+        <h1>Login</h1>
+        <input placeholder="user name" type="text" autocomplete="off" name="username"/>
+        <input placeholder="password" type="password" name="password"/>
+        <input type="submit" value="Login"/>
+    </form>
+    <button name="cancel"><a href="/">Cancel</a></button>
+</div>
 
 
 <!--          <input type="hidden" name="redirectId" value="Home"/>-->
 <!--                  <a href="/">Cancel</a>-->
 
 
-	  <div th:if="${param.error}">
-		  Invalid username and password.
-	  </div>
-	  <div th:if="${param.logout}">
-		  You have been logged out.
-	  </div>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
 
-   </body>
+</body>
 </html>
