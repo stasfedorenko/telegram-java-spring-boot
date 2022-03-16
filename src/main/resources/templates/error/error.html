@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="css/error.css"/>
+    <link rel="stylesheet" type="text/css" href="css/styleBox.css"/>
     <link rel="shortcut icon" href="images/icon.jpg" type="image/jpg">
 </head>
 <body>
-error
-<button type="button" onclick="cancelForm()" class="btn btn-secondary m-2">Home</button>
+<div class="box" style="top: 20%;left: 50%;" >
+    <h1>Error</h1>
+
+    <br>
+    <button type="button"  name="cancel" onclick="cancelForm()" class="btn btn-secondary m-2">Home</button>
+
+</div>
+
 <script type="text/javascript">
     function cancelForm() {
         window.location = "[[@{/}]]"

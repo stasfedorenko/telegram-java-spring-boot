@@ -1,6 +1,7 @@
 package by.fedorenko.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.util.*;
 
 
@@ -10,20 +11,33 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "email", nullable = false)
+
+    @NotEmpty(message = "Email should not be empty")
+    @Email(message = "Email should be valid")
+    @Column(name = "email")
     private String email;
-    @Column(name = "password", nullable = false)
+    @NotEmpty(message = "Password should not be empty")
+    @Size(min = 4, message = "Password should have atleast 4 characters")
+    @Column(name = "password")
     private String password;
+    @NotEmpty(message = "First name should not be empty")
+    @Size(min = 2, message = "First name should have atleast 2 characters")
     @Column(name = "first_name")
     private String firstName;
+    @NotEmpty(message = "Last name should not be empty")
+    @Size(min = 2, message = "Last name should have atleast 2 characters")
     @Column(name = "last_name")
     private String lastName;
+    @NotNull(message = "Role should not be null")
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
+    @NotNull(message = "Status should not be null")
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
+    @NotEmpty(message = "Chat id should not be empty")
+    @Pattern(regexp = "^(\\d){1,20}$",message = "Chat id should consists of numbers")
     @Column(name = "chat_id")
     private String chatId;
 

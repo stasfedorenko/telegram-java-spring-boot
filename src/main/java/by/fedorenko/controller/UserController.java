@@ -7,10 +7,12 @@ import by.fedorenko.repository.UserJpaRepository;
 import by.fedorenko.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,14 +47,21 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ModelAndView saveOrUpdateUser(User user, RedirectAttributes ra) {
-        //todo
-        ModelAndView mv = new ModelAndView("redirect:/users");
-        if (!user.getPassword().isEmpty()) {
+    public ModelAndView saveOrUpdateUser(@Valid User user,
+                                         BindingResult bindingResult, RedirectAttributes ra) {
+        ModelAndView mv;
+        if(bindingResult.hasErrors()){
+            mv = new ModelAndView("/user/user_form");
+            mv.getModel().put("tasks", taskJpaRepository.findAll());
+            return mv;
+        }
+        else{
+            mv = new ModelAndView("redirect:/users");
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             service.saveUser(user);
             ra.addFlashAttribute("message", "Yhe user has been saved successfully.");
+
         }
         return mv;
     }
