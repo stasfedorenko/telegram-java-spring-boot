@@ -35,9 +35,16 @@
                     <td>[[${task.descriptionTask}]]</td>
                     <td>[[${task.users}]]</td>
                     <td>
-                        <a class="h4 mr-3" th:href="@{'/telegram/send_task/'+${task.getId()}}">Send Task</a>
-                        <a class="h4 mr-3" th:href="@{'/tasks/'+${task.getId()}}">Edit</a>
-                        <a class="h4" th:href="@{'/tasks/delete/'+${task.getId()}}">Delete</a>
+                        <form method="get" th:action="@{'/telegram/send_task/'+${task.getId()}}">
+                            <input class="btn btn-success h5 mr-1" type="submit" value="Send task"/>
+                        </form>
+                        <form method="get" th:action="@{'/tasks/'+${task.getId()}}">
+                            <input class="btn btn-warning h5 mr-1" type="submit" value="Edit"/>
+                        </form>
+                        <form method="post" th:action="@{/tasks/{id}(id=${task.getId()})}">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input class="btn btn-danger h5 mr-1" type="submit" value="Delete"/>
+                        </form>
                     </td>
                 </tr>
 

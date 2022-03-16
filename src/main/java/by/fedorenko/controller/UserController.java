@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ModelAndView showEditUser(@PathVariable("id") Long id, Model model) {
+    public ModelAndView showEditUser(@PathVariable("id") Long id) {
         ModelAndView mv;
         try {
             mv = new ModelAndView("/user/user_form");
