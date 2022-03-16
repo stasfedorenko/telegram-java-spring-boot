@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Telegrem place</title>
-    <link rel="stylesheet" type="text/css" href="css/styleBox.css"/>
+    <title>Telegram place</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" th:href="@{css/styleBox.css}"/>
     <link rel="shortcut icon" href="images/icon.jpg" type="image/jpg">
 
 </head>
@@ -12,12 +13,18 @@
 <div class="box">
     <h1>Telegram Manager</h1>
     <br>
+    <span style="color: lawngreen; font-weight: bold; font-size: 20px;" th:if="${sendSuccess}">Report sent success.</span>
+    <br>
     <form th:action="@{/telegram/send}" method="get">
-        <input name="sendReport" type="submit" value="Send Message"/>
+        <input type="submit"/>
     </form>
-    <button name="cancel"><a href="/">Cancel</a></button>
+    <button name="cancel" onclick="cancelForm()">Cancel</button>
 </div>
 
-
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/}]]"
+    }
+</script>
 </body>
 </html>

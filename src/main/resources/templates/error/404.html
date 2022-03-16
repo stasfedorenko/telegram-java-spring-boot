@@ -12,7 +12,14 @@
     <h1>Error 404</h1>
 
     <br>
-    <button name="cancel"><a href="/">Cancel</a></button>
+    <button type="button" onclick="cancelForm()" class="btn btn-secondary m-2">Home</button>
+
 </div>
+
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/}]]"
+    }
+</script>
 </body>
 </html>

@@ -14,8 +14,12 @@
         <br>
         <p name="info">This page for information about user...</p>
     </form>
-    <button name="cancel"><a href="/">Cancel</a></button>
+    <button name="cancel" onclick="cancelForm()">Cancel</button>
 </div>
-
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/}]]"
+    }
+</script>
 </body>
 </html>

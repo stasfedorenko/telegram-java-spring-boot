@@ -1,8 +1,11 @@
 package by.fedorenko.util;
 
 public final class PagePath {
-    public static final String INDEX = "";
-    public static final String ACCOUNT = "myAccount";
+    public static final String INDEX = "/";
+    public static final String TELEGRAM = "telegram-page";
+    public static final String TELEGRAM_SUCCESS = "redirect:/telegram/success";
+
+
     public static final String PROFILE = "myProfile";
     public static final String BASKET = "basket";
     public static final String CHECKOUT = "checkout";

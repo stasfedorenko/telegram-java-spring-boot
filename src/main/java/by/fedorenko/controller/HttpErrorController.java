@@ -42,13 +42,13 @@ public class HttpErrorController implements ErrorController {
 
             // 403
             if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                return "redirect:/403";
+                return "/error/403";
                 // do somthing
             }
 
             // 404
             else if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "redirect:/404";
+                return "/error/404";
             }
 
             // 405
@@ -62,7 +62,7 @@ public class HttpErrorController implements ErrorController {
             }
 
         }
-        return "redirect:/error";
+        return "/error/error";
     }
 
 

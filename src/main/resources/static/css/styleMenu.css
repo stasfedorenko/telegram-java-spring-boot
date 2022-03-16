@@ -68,7 +68,26 @@ header {
     align-items: center;
     padding: 20px 10%;
 }
+.box {
+    width: auto;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191919;
+    border-radius: 15px;
+    text-align: center;
+}
 
+.box h1{
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+    background: #191919;
+
+    font-weight: 400;
+}
 
 .logo img {
     cursor: pointer;

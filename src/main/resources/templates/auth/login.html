@@ -18,7 +18,8 @@
         <input placeholder="password" type="password" name="password"/>
         <input type="submit" value="Login"/>
     </form>
-    <button name="cancel"><a href="/">Cancel</a></button>
+    <button type="button" onclick="cancelForm()" name="cancel">Cancel</button>
+
 </div>
 
 
@@ -32,6 +33,10 @@
 <div th:if="${param.logout}">
     You have been logged out.
 </div>
-
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/}]]"
+    }
+</script>
 </body>
 </html>

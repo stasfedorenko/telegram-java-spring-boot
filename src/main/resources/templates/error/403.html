@@ -14,9 +14,14 @@
     <h1>Error 403</h1>
     <h1 name="error">Access denied</h1>
     <br>
-    <button name="cancel"><a href="/">Cancel</a></button>
-</div>
+    <button type="button" onclick="cancelForm()" class="btn btn-secondary m-2">Home</button>
 
+</div>
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/}]]"
+    }
+</script>
 
 </body>
 </html>
