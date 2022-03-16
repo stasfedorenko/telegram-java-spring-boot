@@ -43,9 +43,13 @@
                     <td>[[${user.chatId}]]</td>
                     <td>[[${user.tasks}]]</td>
                     <td>
-                        <input type="hidden" name="_method" value="DELETE">
-                        <a class="h4 mr-3" th:href="@{'/users/'+${user.getId()}}">Edit</a>
-                        <a class="h4" th:href="@{'/users/delete/'+${user.getId()}}">Delete</a>
+                        <form method="get" th:action="@{'/users/'+${user.getId()}}">
+                            <input class="btn btn-warning h5 mr-1" type="submit" value="Edit"/>
+                        </form>
+                        <form method="post" th:action="@{/users/{id}(id=${user.getId()})}">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <input class="btn btn-danger h5 mr-1" type="submit" value="Delete"/>
+                        </form>
                     </td>
                 </tr>
 

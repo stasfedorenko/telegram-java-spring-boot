@@ -4,14 +4,13 @@ package by.fedorenko;
 import by.fedorenko.entity.Role;
 import by.fedorenko.entity.Status;
 import by.fedorenko.entity.User;
-import by.fedorenko.repository.UserRepository;
+import by.fedorenko.repository.UserJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.util.Assert;
 
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ import java.util.Optional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Rollback(value = false)
 public class UserRepositoryTest {
-    @Autowired private UserRepository repo;
+    @Autowired private UserJpaRepository repo;
 
 
 
