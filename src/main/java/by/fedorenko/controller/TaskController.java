@@ -5,12 +5,12 @@ import by.fedorenko.exception.TaskNotFoundException;
 import by.fedorenko.repository.TaskJpaRepository;
 import by.fedorenko.repository.UserJpaRepository;
 import by.fedorenko.service.TaskService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +20,7 @@ public class TaskController {
     private final TaskService service;
     private final UserJpaRepository userJpaRepository;
 
-    public TaskController(TaskService service, TaskJpaRepository taskJpaRepository, UserJpaRepository userJpaRepository) {
+    public TaskController(TaskService service, UserJpaRepository userJpaRepository) {
         this.service = service;
         this.userJpaRepository = userJpaRepository;
     }
@@ -47,22 +47,30 @@ public class TaskController {
 
     @PostMapping("")
 //    @PreAuthorize("hasAuthority('developers:write')")
-    public ModelAndView saveTask(Task task, RedirectAttributes ra) {
-        ModelAndView mv = new ModelAndView("redirect:/tasks");
-        service.saveTask(task);
-        ra.addFlashAttribute("message", "Yhe task has been saved successfully." );
+    public ModelAndView saveOrUpdateTask(@Valid Task task, BindingResult bindingResult, RedirectAttributes ra) {
+
+        ModelAndView mv;
+        if (bindingResult.hasErrors()) {
+            mv = new ModelAndView("/task/task_form");
+            mv.getModel().put("users",userJpaRepository.findAll());
+            return mv;
+        } else {
+            mv = new ModelAndView("redirect:/tasks");
+            service.saveTask(task);
+            ra.addFlashAttribute("message", "Yhe task has been saved successfully.");
+        }
         return mv;
     }
 
     @GetMapping("/{id}")
-    public ModelAndView showEditTask(@PathVariable("id") Long id){
+    public ModelAndView showEditTask(@PathVariable("id") Long id) {
         ModelAndView mv;
         try {
             mv = new ModelAndView("/task/task_form");
             Task task = service.getTask(id);
-            mv.getModel().put("users",userJpaRepository.findAll());
+            mv.getModel().put("users", userJpaRepository.findAll());
             mv.getModel().put("task", task);
-            mv.getModel().put("pageTitle", "Update Task ID = "+id);
+            mv.getModel().put("pageTitle", "Update Task ID = " + id);
             return mv;
         } catch (TaskNotFoundException e) {
             mv = new ModelAndView("redirect:/tasks");
@@ -72,11 +80,11 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ModelAndView deleteTask(@PathVariable("id") Long id, RedirectAttributes ra){
+    public ModelAndView deleteTask(@PathVariable("id") Long id, RedirectAttributes ra) {
         ModelAndView mv = new ModelAndView("redirect:/tasks");
         try {
             service.delete(id);
-            ra.addFlashAttribute("message", "Yhe task has been deleted successfully." );
+            ra.addFlashAttribute("message", "Yhe task has been deleted successfully.");
         } catch (TaskNotFoundException e) {
             e.printStackTrace();
         }

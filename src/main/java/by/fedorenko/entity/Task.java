@@ -1,6 +1,8 @@
 package by.fedorenko.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,8 +15,12 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Name task should not be empty")
+    @Size(min = 4, message = "Name should have atleast 4 characters")
     @Column(name = "name_task")
     private String nameTask;
+    @NotEmpty(message = "Description should not be empty")
+    @Size(min = 4, message = "Description should have atleast 4 characters")
     @Column(name = "description_task")
     private String descriptionTask;
     @ManyToMany

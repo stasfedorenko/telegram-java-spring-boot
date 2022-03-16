@@ -3,10 +3,8 @@ package by.fedorenko.controller;
 import by.fedorenko.entity.User;
 import by.fedorenko.exception.UserNotFoundException;
 import by.fedorenko.repository.TaskJpaRepository;
-import by.fedorenko.repository.UserJpaRepository;
 import by.fedorenko.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +20,7 @@ public class UserController {
     private final UserService service;
     private final TaskJpaRepository taskJpaRepository;
 
-    public UserController(UserService service, TaskJpaRepository taskJpaRepository, UserJpaRepository userJpaRepository) {
+    public UserController(UserService service, TaskJpaRepository taskJpaRepository) {
         this.service = service;
         this.taskJpaRepository = taskJpaRepository;
     }
@@ -61,7 +59,6 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             service.saveUser(user);
             ra.addFlashAttribute("message", "Yhe user has been saved successfully.");
-
         }
         return mv;
     }
