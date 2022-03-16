@@ -55,8 +55,6 @@ public class UserController {
         }
         else{
             mv = new ModelAndView("redirect:/users");
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
             service.saveUser(user);
             ra.addFlashAttribute("message", "Yhe user has been saved successfully.");
         }

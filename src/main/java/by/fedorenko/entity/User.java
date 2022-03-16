@@ -4,14 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.*;
 
-
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     @Column(name = "email")
@@ -138,6 +136,4 @@ public class User {
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
-
-
 }

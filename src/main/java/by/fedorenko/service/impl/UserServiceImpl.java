@@ -4,6 +4,7 @@ import by.fedorenko.entity.User;
 import by.fedorenko.exception.UserNotFoundException;
 import by.fedorenko.repository.UserJpaRepository;
 import by.fedorenko.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,11 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserJpaRepository userJpaRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserJpaRepository userJpaRepository) {
-
+    public UserServiceImpl(UserJpaRepository userJpaRepository, PasswordEncoder passwordEncoder) {
         this.userJpaRepository = userJpaRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userJpaRepository.save(user);
     }
 
