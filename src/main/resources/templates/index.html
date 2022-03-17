@@ -9,12 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <link rel="stylesheet" type="text/css" href="/css/styleMenu.css"/>
-
-
 </head>
-
 <body>
-
 <header>
     <img class="logo" alt="logo" src="images/education-icon-3.jpg" width="50"/>
     <nav>
@@ -32,18 +28,18 @@
             </li>
         </ul>
     </nav>
-    <a  sec:authorize="isAuthenticated()" th:inline="text" class="out_user_name">
+    <a sec:authorize="isAuthenticated()" th:inline="text" class="out_user_name">
         <output name="name"> Hello [[${#httpServletRequest.remoteUser}]]!</output>
     </a>
 </header>
 
 <div class="box">
-    <h1>APP</h1>
+    <h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
     <br>
-    <h1  sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <br/>
+    <h1>This is app for work with telegram bot</h1>
+    <br>
+    <h1>[[${bot.getBotUsername}]]</h1>
+    <br>
 </div>
-
-
 </body>
 </html>

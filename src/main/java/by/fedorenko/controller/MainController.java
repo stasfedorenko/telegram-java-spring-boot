@@ -1,5 +1,6 @@
 package by.fedorenko.controller;
 
+import by.fedorenko.bots.MyBot;
 import by.fedorenko.entity.User;
 import by.fedorenko.repository.UserJpaRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,9 +21,8 @@ public class MainController {
 
     @GetMapping("/")
     public String showHomePage(Model model) {
-
-        List<User> users = userJpaRepository.findAll();
-        model.addAttribute("users", users);
+    MyBot bot = MyBot.getInstance();
+        model.addAttribute("bot", bot);
         return "index";
     }
 
