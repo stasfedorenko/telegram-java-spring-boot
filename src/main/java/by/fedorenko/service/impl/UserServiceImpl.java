@@ -1,5 +1,7 @@
 package by.fedorenko.service.impl;
 
+import by.fedorenko.entity.Role;
+import by.fedorenko.entity.Status;
 import by.fedorenko.entity.User;
 import by.fedorenko.exception.UserNotFoundException;
 import by.fedorenko.repository.UserJpaRepository;
@@ -33,6 +35,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveUser(User user, Boolean registration) {
+        user.setStatus(Status.ACTIVE);
+        user.setRole(Role.USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userJpaRepository.save(user);
+    }
+
+    @Override
     public User getUser(Long id) throws UserNotFoundException {
         Optional<User> result = userJpaRepository.findById(id);
         if (result.isPresent()) {
@@ -50,5 +60,10 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new UserNotFoundException("Couldn't find any users with ID = " + id);
         }
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userJpaRepository.findByEmail(email);
     }
 }

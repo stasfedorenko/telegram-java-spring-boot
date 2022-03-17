@@ -14,14 +14,22 @@
 <body>
 <div th:if="${message}"></div>
 <div class="box">
-    <form th:action="@{/registration}" method="post">
+    <form th:action="@{/registration}" method="post" th:object="${user}" >
 
         <h1>Registration</h1>
-        <input placeholder="first name" type="text" autocomplete="off" name="firstName"/>
-        <input placeholder="last name" type="text" autocomplete="off" name="lastName"/>
-        <input placeholder="email" type="text" autocomplete="off" name="email"/>
-        <input placeholder="password" type="password" name="password"/>
-        <input placeholder="chat id" type="text" autocomplete="off" name="chatId"/>
+        <br>
+        <input placeholder="first name" th:field="*{firstName}" type="text" autocomplete="off" name="firstName"/>
+        <div style="color: red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Password Error</div>
+        <input placeholder="last name" th:field="*{lastName}" type="text" autocomplete="off" name="lastName"/>
+        <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Password Error</div>
+        <input placeholder="email" th:field="*{email}" type="text" autocomplete="off" name="email"/>
+        <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Password Error</div>
+        <input placeholder="password"  th:field="*{password}" type="password" name="password"/>
+        <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+        <input placeholder="chat id" th:field="*{chatId}" type="text" autocomplete="off" name="chatId"/>
+        <div style="color: red" th:if="${#fields.hasErrors('chatId')}" th:errors="*{chatId}">Password Error</div>
+        <input type="radio" value="USER" checked hidden name="role"/>
+        <input type="radio" value="ACTIVE" checked hidden name="status"/>
         <input type="submit" value="Registration"/>
     </form>
     <button type="button" onclick="cancelForm()" name="cancel">Home</button>
