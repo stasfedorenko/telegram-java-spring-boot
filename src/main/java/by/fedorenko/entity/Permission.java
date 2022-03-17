@@ -1,8 +1,8 @@
 package by.fedorenko.entity;
 
 public enum Permission {
-    DEVELOPERS_READ("developers:read"),
-    DEVELOPERS_WRITE("developers:write");
+    READ("read"),
+    WRITE("write");
 
     private final String permission;
 

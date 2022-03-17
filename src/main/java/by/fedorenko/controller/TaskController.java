@@ -5,6 +5,7 @@ import by.fedorenko.exception.TaskNotFoundException;
 import by.fedorenko.repository.TaskJpaRepository;
 import by.fedorenko.repository.UserJpaRepository;
 import by.fedorenko.service.TaskService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
+@PreAuthorize("hasAuthority('read')")
 public class TaskController {
 
     private final TaskService service;
@@ -26,7 +28,6 @@ public class TaskController {
     }
 
     @GetMapping("")
-//    @PreAuthorize("hasAuthority('developers:read')")
     public ModelAndView showTaskList() {
         ModelAndView mv = new ModelAndView("/task/tasks-page");
         mv.getModel().put("users", userJpaRepository.findAll());
@@ -36,7 +37,7 @@ public class TaskController {
     }
 
     @GetMapping("/new")
-//    @PreAuthorize("hasAuthority('developers:write')")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView showNewFormTask() {
         ModelAndView mv = new ModelAndView("/task/task_form");
         mv.getModel().put("users", userJpaRepository.findAll());
@@ -46,7 +47,7 @@ public class TaskController {
     }
 
     @PostMapping("")
-//    @PreAuthorize("hasAuthority('developers:write')")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView saveOrUpdateTask(@Valid Task task, BindingResult bindingResult, RedirectAttributes ra) {
 
         ModelAndView mv;
@@ -63,6 +64,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView showEditTask(@PathVariable("id") Long id) {
         ModelAndView mv;
         try {
@@ -80,6 +82,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView deleteTask(@PathVariable("id") Long id, RedirectAttributes ra) {
         ModelAndView mv = new ModelAndView("redirect:/tasks");
         try {

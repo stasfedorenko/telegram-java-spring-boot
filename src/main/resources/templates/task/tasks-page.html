@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Tasks list</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="shortcut icon" href="images/icon.jpg" type="image/jpg">
+    <link rel="shortcut icon" href="/images/icon.jpg" type="image/jpg">
 </head>
 <body style="background: lightseagreen">
 <div class="container-fluid text-center">
@@ -34,7 +34,7 @@
                     <td>[[${task.nameTask}]]</td>
                     <td>[[${task.descriptionTask}]]</td>
                     <td>[[${task.users}]]</td>
-                    <td>
+                    <td sec:authorize="hasAuthority('write')" >
                         <form method="get" th:action="@{'/telegram/send_task/'+${task.getId()}}">
                             <input class="btn btn-success h5 mr-1" type="submit" value="Send task"/>
                         </form>

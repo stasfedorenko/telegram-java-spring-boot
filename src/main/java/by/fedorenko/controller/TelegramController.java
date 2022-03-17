@@ -5,6 +5,7 @@ import by.fedorenko.repository.TaskJpaRepository;
 import by.fedorenko.service.BotService;
 import by.fedorenko.service.PdfService;
 import by.fedorenko.util.PagePath;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/telegram")
+@PreAuthorize("hasAuthority('read')")
 public class TelegramController {
 
     private final PdfService pdfService;
@@ -30,7 +32,6 @@ public class TelegramController {
     }
 
     @GetMapping("/send")
-//    @PreAuthorize("hasAuthority('developers:write')")
     public String send(Model model, HttpServletResponse response, HttpServletRequest request) {
         String basePath = request.getServletContext().getRealPath("/");
         try {
@@ -44,7 +45,7 @@ public class TelegramController {
     }
 
     @GetMapping("/send_task/{id}")
-//    @PreAuthorize("hasAuthority('developers:write')")
+    @PreAuthorize("hasAuthority('developers:write')")
     public String sendTasks(Model model, @PathVariable("id") Long id) {
         try {
             serviceBot.sendTask(taskJpaRepository.findById(id).get());
@@ -56,14 +57,12 @@ public class TelegramController {
 
 
     @GetMapping("/success")
-//    @PreAuthorize("hasAuthority('developers:write')")
     public String success(Model model){
         model.addAttribute("sendSuccess",true);
         return PagePath.TELEGRAM;
     }
 
     @GetMapping("")
-//    @PreAuthorize("hasAuthority('developers:write')")
     public String index() {
         return PagePath.TELEGRAM;
     }

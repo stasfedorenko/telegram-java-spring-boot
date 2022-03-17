@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
-    <link rel="shortcut icon" href="images/icon.jpg" type="image/jpg">
+    <link rel="shortcut icon" href="/images/icon.jpg" type="image/jpg">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
-    <link rel="stylesheet" type="text/css" href="css/styleMenu.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styleMenu.css"/>
 
 
 </head>
@@ -19,29 +19,29 @@
     <img class="logo" alt="logo" src="images/education-icon-3.jpg" width="50"/>
     <nav>
         <ul class="nav_links">
-            <li><a href="/tasks"> Tasks </a></li>
-            <li><a href="/telegram"> Telegram </a></li>
-            <li><a href="/users"> Users </a></li>
-            <li><a href="/user"> My page </a></li>
-            <li><a href="/login"> Sign in </a></li>
-            <li><a href="/registration"> Sign up </a></li>
-            <li>
+            <li sec:authorize="hasAuthority('read')"><a href="/tasks"> Tasks </a></li>
+            <li sec:authorize="hasAuthority('read')"><a href="/users"> Users </a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/user"> My page </a></li>
+            <li sec:authorize="isAuthenticated()"><a href="/telegram"> Telegram </a></li>
+            <li sec:authorize="isAnonymous()"><a href="/login"> Sign in </a></li>
+            <li sec:authorize="isAnonymous()"><a href="/registration"> Sign up </a></li>
+            <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post">
                     <button name="logout"><a type="submit">Sign out</a></button>
                 </form>
             </li>
-            <li><a href="/"> Home </a></li>
         </ul>
     </nav>
-    <a th:inline="text" class="out_user_name">
+    <a  sec:authorize="isAuthenticated()" th:inline="text" class="out_user_name">
         <output name="name"> Hello [[${#httpServletRequest.remoteUser}]]!</output>
     </a>
-
 </header>
 
 <div class="box">
     <h1>APP</h1>
     <br>
+    <h1  sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <br/>
 </div>
 
 

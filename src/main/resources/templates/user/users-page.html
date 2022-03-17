@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Users list</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="shortcut icon" href="images/icon.jpg" type="image/jpg">
+    <link rel="shortcut icon" href="/images/icon.jpg" type="image/jpg">
 </head>
 <body style="background: beige">
 <div class="container-fluid text-center">
@@ -42,28 +42,24 @@
                     <td>[[${user.status}]]</td>
                     <td>[[${user.chatId}]]</td>
                     <td>[[${user.tasks}]]</td>
-                    <td>
-                        <form method="get" th:action="@{'/users/'+${user.getId()}}">
+                    <td sec:authorize="hasAuthority('write')" >
+                        <form method="get"
+                              th:action="@{'/users/'+${user.getId()}}">
                             <input class="btn btn-warning h5 mr-1" type="submit" value="Edit"/>
                         </form>
-                        <form method="post" th:action="@{/users/{id}(id=${user.getId()})}">
+                        <form method="post"
+                              th:action="@{/users/{id}(id=${user.getId()})}">
                             <input type="hidden" name="_method" value="delete"/>
                             <input class="btn btn-danger h5 mr-1" type="submit" value="Delete"/>
                         </form>
                     </td>
                 </tr>
-
             </th:block>
-
-
             </tbody>
-
-
         </table>
         <div>
             <button type="button" onclick="cancelForm()" class="btn btn-secondary m-2">Home</button>
         </div>
-
     </div>
 </div>
 <script type="text/javascript">

@@ -4,6 +4,7 @@ import by.fedorenko.entity.User;
 import by.fedorenko.exception.UserNotFoundException;
 import by.fedorenko.repository.TaskJpaRepository;
 import by.fedorenko.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@PreAuthorize("hasAuthority('read')")
 public class UserController {
 
     private final UserService service;
@@ -26,7 +28,6 @@ public class UserController {
     }
 
     @GetMapping("")
-//    @PreAuthorize("hasAuthority('developers:read')")
     public ModelAndView showUsersList() {
         ModelAndView mv = new ModelAndView("/user/users-page");
         mv.getModel().put("tasks", taskJpaRepository.findAll());
@@ -36,6 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView showNewForm() {
         ModelAndView mv = new ModelAndView("/user/user_form");
         mv.getModel().put("tasks", taskJpaRepository.findAll());
@@ -45,6 +47,7 @@ public class UserController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView saveOrUpdateUser(@Valid User user,
                                          BindingResult bindingResult, RedirectAttributes ra) {
         ModelAndView mv;
@@ -62,6 +65,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView showEditUser(@PathVariable("id") Long id) {
         ModelAndView mv;
         try {
@@ -79,6 +83,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('write')")
     public ModelAndView deleteUser(@PathVariable("id") Long id, RedirectAttributes ra) {
         ModelAndView mv = new ModelAndView("redirect:/users");
         try {
