@@ -9,7 +9,7 @@
 <body style="background: beige">
 <div class="container-fluid text-center">
     <div><h2>Manage User</h2></div>
-    <div class="m-2">
+    <div sec:authorize="hasAuthority('write')" class="m-2">
         <a class="h3" th:href="@{/users/new}">Add New User</a>
     </div>
 

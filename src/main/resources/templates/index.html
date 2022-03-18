@@ -33,12 +33,12 @@
     </a>
 </header>
 
-<div class="box">
+<div class="box" style=" top: 50%; left: 50%;">
     <h1 sec:authorize="isAuthenticated()" th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
     <br>
-    <h1>This is app for work with telegram bot</h1>
+    <h1 style="color: lightseagreen">This is app Task Management with Telegram</h1>
     <br>
-    <h1>[[${bot.getBotUsername}]]</h1>
+    <h1 style="color: darkgreen">[[${bot.getBotUsername}]]</h1>
     <br>
 </div>
 </body>

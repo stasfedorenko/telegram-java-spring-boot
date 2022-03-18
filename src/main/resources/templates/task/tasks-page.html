@@ -9,7 +9,7 @@
 <body style="background: lightseagreen">
 <div class="container-fluid text-center">
     <div><h2>Manage Task</h2></div>
-    <div class="m-2">
+    <div sec:authorize="hasAuthority('write')" class="m-2">
         <a class="h3" th:href="@{/tasks/new}">Add New Task</a>
     </div>
 
