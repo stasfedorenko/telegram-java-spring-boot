@@ -45,7 +45,7 @@ public class TelegramController {
     }
 
     @GetMapping("/send_task/{id}")
-    @PreAuthorize("hasAuthority('developers:write')")
+    @PreAuthorize("hasAuthority('write')")
     public String sendTasks(Model model, @PathVariable("id") Long id) {
         try {
             serviceBot.sendTask(taskJpaRepository.findById(id).get());
